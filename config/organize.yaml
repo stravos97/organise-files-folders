@@ -93,6 +93,61 @@ rules:
       - move:
           dest: /Volumes/Multimedia/Other2/Organized/Documents/PDF/
           on_conflict: rename_new
+          
+  # New rules for EXIF-based photo renaming
+  - name: Rename Photos Using EXIF Data
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - jpg
+          - jpeg
+          - png
+          - tiff
+          - tif
+          - heic
+          - jfif
+          - arw
+          - nef
+          - cr2
+          - dng
+          - raw
+      - exif  # Ensures files have EXIF data
+    actions:
+      - echo: "Renaming photo with EXIF data: {path}"
+      - rename: "{exif.image.make}_{exif.image.model}_{exif.image.datetime.year}-{exif.image.datetime.month}-{exif.image.datetime.day}_{exif.image.datetime.hour}-{exif.image.datetime.minute}-{exif.image.datetime.second}.{extension}"
+      
+  - name: Rename Photos Without EXIF Data
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - jpg
+          - jpeg
+          - png
+          - tiff
+          - tif
+          - heic
+          - jfif
+          - arw
+          - nef
+          - cr2
+          - dng
+          - raw
+      - not exif  # Only files WITHOUT EXIF data
+      - created  # Use file creation date as fallback
+    actions:
+      - echo: "Renaming photo without EXIF data: {path}"
+      - rename: "{parent_dir}_{created.year}-{created.month}-{created.day}_{name}.{extension}"
+      
   - name: Organize Raster Images
     enabled: true
     targets: files
