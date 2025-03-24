@@ -788,7 +788,179 @@ rules:
       - move:
           dest: /Volumes/Multimedia/Other2/Cleanup/System/
           on_conflict: rename_new
-  - name: Find Duplicate Files
+
+  # New specialized rules for handling duplicates
+
+  - name: Handle Music File Duplicates
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - mp3
+          - wav
+          - aac
+          - flac
+          - m4a
+          - wma
+          - opus
+          - m4r
+          - ogg
+          - aiff
+          - aif
+          - aifc
+      - duplicate:
+          detect_original_by: "-first_seen"  # Temporary, will be overridden by Python filter
+      - python: |
+          import mutagen
+          import os
+          
+          # Function to score metadata completeness
+          def score_metadata(file_path):
+              try:
+                  audio = mutagen.File(file_path)
+                  if audio is None:
+                      return 0
+                  
+                  score = 0
+                  # Check for common tag fields
+                  # Different audio formats use different tag structures
+                  # ID3 (MP3)
+                  if hasattr(audio, 'tags') and audio.tags:
+                      # ID3 tags
+                      if 'TPE1' in audio:  # Artist
+                          score += 1
+                      if 'TIT2' in audio:  # Title
+                          score += 1
+                      if 'TALB' in audio:  # Album
+                          score += 1
+                      if 'TDRC' in audio or 'TYER' in audio:  # Year
+                          score += 1
+                      if 'TCON' in audio:  # Genre
+                          score += 1
+                      if 'APIC:' in audio or 'APIC' in audio:  # Cover art
+                          score += 0.5
+                  # FLAC/Vorbis comments
+                  elif hasattr(audio, 'get'):
+                      if audio.get('artist'):
+                          score += 1
+                      if audio.get('title'):
+                          score += 1
+                      if audio.get('album'):
+                          score += 1
+                      if audio.get('date'):
+                          score += 1
+                      if audio.get('genre'):
+                          score += 1
+                      if hasattr(audio, 'pictures') and audio.pictures:
+                          score += 0.5
+                  # MP4/AAC
+                  elif hasattr(audio, 'keys'):
+                      if '\xa9ART' in audio:  # Artist
+                          score += 1
+                      if '\xa9nam' in audio:  # Title
+                          score += 1
+                      if '\xa9alb' in audio:  # Album
+                          score += 1
+                      if '\xa9day' in audio:  # Year
+                          score += 1
+                      if '\xa9gen' in audio:  # Genre
+                          score += 1
+                      if 'covr' in audio:  # Cover art
+                          score += 0.5
+                  
+                  # Add a small bonus for higher quality files (using file size as a proxy)
+                  file_size = os.path.getsize(file_path)
+                  size_score = min(file_size / 10000000, 0.5)  # Max 0.5 points for size
+                  score += size_score
+                  
+                  return score
+              except Exception:
+                  return 0
+          
+          # Get paths for original and current file
+          original_path = duplicate["original"]
+          current_path = str(path)
+          
+          # Score both files
+          original_score = score_metadata(original_path)
+          current_score = score_metadata(current_path)
+          
+          # If current file has better metadata, swap it to be the original
+          if current_score > original_score:
+              # We can't directly modify the duplicate.original value
+              # But we can return False to filter out this file, effectively
+              # making the current file the "original" for future comparisons
+              return False
+          
+          # If original has better or equal metadata, keep it as original
+          # and mark this as a duplicate
+          return {"is_duplicate": True, "score": current_score, "original_score": original_score}
+    actions:
+      - echo: "Found music duplicate: {path} (Original: {duplicate.original})"
+      - rename: "{path.stem}_duplicate_{duplicate.count}.{extension}"
+
+  - name: Handle Image Duplicates
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - jpg
+          - jpeg
+          - png
+          - gif
+          - bmp
+          - tif
+          - webp
+          - heic
+          - jfif
+          - tiff
+          - raw
+          - arw
+          - nef
+          - cr2
+          - dng
+      - duplicate:
+          detect_original_by: created  # Keep the oldest image as original
+    actions:
+      - echo: "Found image duplicate: {path} (Original: {duplicate.original})"
+      - rename: "{path.stem}_duplicate_{duplicate.count}.{extension}"
+
+  - name: Handle Video Duplicates
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - mp4
+          - avi
+          - mov
+          - wmv
+          - flv
+          - m4v
+          - 3gp
+          - mkv
+          - webm
+          - mpeg
+          - mpg
+          - m2ts
+      - duplicate:
+          detect_original_by: created  # Keep the oldest video as original
+    actions:
+      - echo: "Found video duplicate: {path} (Original: {duplicate.original})"
+      - rename: "{path.stem}_duplicate_{duplicate.count}.{extension}"
+
+  - name: Find Duplicate Files (General)
     enabled: true
     targets: files
     locations:
@@ -798,11 +970,54 @@ rules:
     filters:
       - duplicate:
           detect_original_by: created
+      # Exclude files already handled by specialized duplicate rules
+      - not extension:
+          # Music
+          - mp3
+          - wav
+          - aac
+          - flac
+          - m4a
+          - wma
+          - opus
+          - m4r
+          - ogg
+          - aiff
+          - aif
+          - aifc
+          # Images
+          - jpg
+          - jpeg
+          - png
+          - gif
+          - bmp
+          - tif
+          - webp
+          - heic
+          - jfif
+          - tiff
+          - raw
+          - arw
+          - nef
+          - cr2
+          - dng
+          # Videos
+          - mp4
+          - avi
+          - mov
+          - wmv
+          - flv
+          - m4v
+          - 3gp
+          - mkv
+          - webm
+          - mpeg
+          - mpg
+          - m2ts
     actions:
-      - echo: "Found duplicate: {path} (Original: {duplicate.original})"
-      - move:
-          dest: /Volumes/Multimedia/Other2/Cleanup/Duplicates/{relative_path}/
-          on_conflict: rename_new
+      - echo: "Found general duplicate: {path} (Original: {duplicate.original})"
+      - rename: "{path.stem}_duplicate_{duplicate.count}.{extension}"
+
   - name: Handle Files With No Extension
     enabled: true
     targets: files
