@@ -903,7 +903,9 @@ rules:
       : original_score}\n"
   actions:
   - echo: 'Found music duplicate: {path} (Original: {duplicate.original})'
-  - rename: '{path.stem}_duplicate_{duplicate.count}.{extension}'
+  - move:
+      dest: /Volumes/Multimedia/Other2v2-needs-to-go-Into-other-3/Cleanup/Duplicates/Music/{path.stem}_duplicate_{duplicate.count}.{extension}
+      on_conflict: rename_new
 - name: Handle Image Duplicates
   enabled: true
   targets: files
@@ -932,7 +934,9 @@ rules:
       detect_original_by: created
   actions:
   - echo: 'Found image duplicate: {path} (Original: {duplicate.original})'
-  - rename: '{path.stem}_duplicate_{duplicate.count}.{extension}'
+  - move:
+      dest: /Volumes/Multimedia/Other2v2-needs-to-go-Into-other-3/Cleanup/Duplicates/Images/{path.stem}_duplicate_{duplicate.count}.{extension}
+      on_conflict: rename_new
 - name: Handle Video Duplicates
   enabled: true
   targets: files
@@ -958,7 +962,9 @@ rules:
       detect_original_by: created
   actions:
   - echo: 'Found video duplicate: {path} (Original: {duplicate.original})'
-  - rename: '{path.stem}_duplicate_{duplicate.count}.{extension}'
+  - move:
+      dest: /Volumes/Multimedia/Other2v2-needs-to-go-Into-other-3/Cleanup/Duplicates/Videos/{path.stem}_duplicate_{duplicate.count}.{extension}
+      on_conflict: rename_new
 - name: Find Duplicate Files (General)
   enabled: true
   targets: files
@@ -1011,7 +1017,9 @@ rules:
     - m2ts
   actions:
   - echo: 'Found general duplicate: {path} (Original: {duplicate.original})'
-  - rename: '{path.stem}_duplicate_{duplicate.count}.{extension}'
+  - move:
+      dest: /Volumes/Multimedia/Other2v2-needs-to-go-Into-other-3/Cleanup/Duplicates/Other/{path.stem}_duplicate_{duplicate.count}.{extension}
+      on_conflict: rename_new
 - name: Handle Files With No Extension
   enabled: true
   targets: files
