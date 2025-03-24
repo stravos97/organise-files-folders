@@ -1,0 +1,846 @@
+rules:
+  - name: Organize Text Documents
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - txt
+          - rtf
+          - md
+          - md5
+          - mdown
+          - markdown
+          - tex
+          - latex
+          - text
+          - info
+          - csv
+          - rst
+          - wiki
+          - org
+          - typ
+          - types
+          - def
+          - inc
+          - desc
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Documents/Text/
+          on_conflict: rename_new
+  - name: Organize Office Documents
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - doc
+          - docx
+          - odt
+          - pages
+          - dotx
+          - xls
+          - xlsx
+          - xlsm
+          - ods
+          - xlc
+          - xlb
+          - ppt
+          - pps
+          - pptx
+          - thmx
+          - odp
+          - pub
+          - sxw
+          - indd
+          - dps
+          - dt2
+          - dot
+          - dotm
+          - xlt
+          - xlw
+          - xlam
+          - xll
+          - numbers
+          - keynote
+          - wri
+          - rtc
+          - vsd
+          - form
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Documents/Office/{extension}/
+          on_conflict: rename_new
+  - name: Organize PDF Documents
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - pdf
+          - pdf#
+          - xps
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Documents/PDF/
+          on_conflict: rename_new
+  - name: Organize Raster Images
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - jpg
+          - jpeg
+          - png
+          - gif
+          - bmp
+          - tif
+          - webp
+          - heic
+          - jfif
+          - mpo
+          - ico
+          - dsc
+          - dng
+          - pcx
+          - pic
+          - jp2
+          - tiff
+          - tga
+          - xbm
+          - xpm
+          - cgm
+          - hdr
+          - exr
+          - pbm
+          - pgm
+          - ppm
+          - pnm
+          - ras
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Images/Photos/
+          on_conflict: rename_new
+  - name: Organize Vector Images
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - ai
+          - eps
+          - svg
+          - wmf
+          - emf
+          - cdr
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Images/Vector/
+          on_conflict: rename_new
+  - name: Organize Raw Camera Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - arw
+          - nef
+          - cr2
+          - crw
+          - raw
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Images/Raw/
+          on_conflict: rename_new
+  - name: Organize Adobe Image Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - psd
+          - abr
+          - 8bi
+          - 8bf
+          - xmp
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Images/Adobe/
+          on_conflict: rename_new
+  - name: Organize Audio Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - mp3
+          - wav
+          - aac
+          - flac
+          - m4a
+          - wma
+          - opus
+          - m4r
+          - amr
+          - apm
+          - aif
+          - aifc
+          - aiff
+          - m4p
+          - au
+          - snd
+          - mid
+          - midi
+          - mod
+          - ogg
+          - 8svx
+          - caf
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Audio/
+          on_conflict: rename_new
+  - name: Organize Audio Playlists
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - m3u
+          - m3u8
+          - wpl
+          - mpl
+          - cue
+          - lrc
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Audio/Playlists/
+          on_conflict: rename_new
+  - name: Organize Video Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - mp4
+          - avi
+          - mov
+          - wmv
+          - flv
+          - m4v
+          - 3gp
+          - mts
+          - mpg
+          - sub
+          - m2ts
+          - mkv
+          - vob
+          - mpls
+          - bdmv
+          - ifo
+          - m2v
+          - mpeg
+          - webm
+          - divx
+          - asf
+          - rm
+          - rmvb
+          - ogv
+          - ts
+          - vob
+          - m2ts
+          - clpi
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Media/Video/
+          on_conflict: rename_new
+  - name: Organize Web Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - html
+          - htm
+          - xml
+          - xsd
+          - xslt
+          - jsp
+          - asp
+          - aspx
+          - php
+          - mvc
+          - js
+          - json
+          - css
+          - htaccess
+          - xcu
+          - feed-ms
+          - feedsdb-ms
+          - scss
+          - less
+          - sass
+          - jsx
+          - ts
+          - tsx
+          - vue
+          - svelte
+          - wasm
+          - mjs
+          - cjs
+          - rss
+          - atom
+          - yaml
+          - yml
+          - toml
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Development/Web/{extension}/
+          on_conflict: rename_new
+  - name: Organize Code Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - py
+          - pyc
+          - cs
+          - cc
+          - c
+          - h1d
+          - sh
+          - xpi
+          - xpt
+          - xgi
+          - cpp
+          - h
+          - java
+          - class
+          - jar
+          - swift
+          - go
+          - rs
+          - rb
+          - pl
+          - pm
+          - lua
+          - coffee
+          - scala
+          - kt
+          - groovy
+          - dart
+          - asm
+          - bat
+          - cmd
+          - ps1
+          - vbs
+          - awk
+          - m
+          - mm
+          - r
+          - d
+          - f
+          - pas
+          - lisp
+          - el
+          - clj
+          - erl
+          - ex
+          - exs
+          - hs
+          - ml
+          - php
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Development/Code/{extension}/
+          on_conflict: rename_new
+  - name: Organize Database Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - db
+          - sqlite3
+          - db-journal
+          - myd
+          - myi
+          - frm
+          - sql
+          - dbf
+          - dbt
+          - accdb
+          - odb
+          - mdb
+          - syncdb
+          - synciddb
+          - changedb
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Development/Data/Database/
+          on_conflict: rename_new
+  - name: Organize Archive Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - zip
+          - rar
+          - gz
+          - tar
+          - 7z
+          - iso
+          - cpgz
+          - sbz
+          - sfk
+          - swz
+          - tgz
+          - tbz
+          - tbz2
+          - bz2
+          - xz
+          - lzma
+          - lz
+          - z
+          - lha
+          - arj
+          - cab
+          - sit
+          - sitx
+          - ace
+          - zst
+          - lzh
+          - uue
+          - asar
+          - xar
+          - squashfs
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Archives/
+          on_conflict: rename_new
+  - name: Organize Split Archive Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - r00
+          - r01
+          - r02
+          - r03
+          - r04
+          - r05
+          - r06
+          - r07
+          - r08
+          - r09
+          - r10
+          - r11
+          - r12
+          - r13
+          - r14
+          - r15
+          - r16
+          - r17
+          - r18
+          - r19
+          - r20
+          - r21
+          - r22
+          - r23
+          - r24
+          - r25
+          - r26
+          - r27
+          - r28
+          - r29
+          - r30
+          - r31
+          - r32
+          - r33
+          - r34
+          - r35
+          - r36
+          - r37
+          - r38
+          - r39
+          - r40
+          - r41
+          - r42
+          - r43
+          - r44
+          - r45
+          - r46
+          - r47
+          - r48
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Archives/Split/
+          on_conflict: rename_new
+  - name: Organize Font Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - ttf
+          - otf
+          - pfb
+          - pfm
+          - eot
+          - fnttmp
+          - woff
+          - woff2
+          - fon
+          - fnt
+          - ttc
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Fonts/
+          on_conflict: rename_new
+  - name: Organize Executable Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - exe
+          - dll
+          - ocx
+          - scr
+          - msi
+          - com
+          - sys
+          - vbs
+          - app
+          - ipa
+          - air
+          - so
+          - dylib
+          - bin
+          - appx
+          - dmg
+          - pkg
+          - deb
+          - rpm
+          - apk
+          - jar
+          - bat
+          - cmd
+          - sh
+          - ps1
+          - run
+          - out
+          - o
+          - a
+          - lib
+          - framework
+          - appimage
+          - flatpak
+          - snap
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Applications/{extension}/
+          on_conflict: rename_new
+  - name: Organize Configuration Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - ini
+          - cfg
+          - conf
+          - config
+          - properties
+          - reg
+          - inf
+          - plist
+          - theme
+          - opt
+          - json
+          - xml
+          - yaml
+          - yml
+          - toml
+          - env
+          - htaccess
+          - gitignore
+          - dockerignore
+          - editorconfig
+          - manifest
+          - settings
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/System/Config/
+          on_conflict: rename_new
+  - name: Identify Log Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - log
+          - log1
+          - log2
+          - log_
+          - ezlog
+          - uccapilog
+          - elog
+          - syslog
+          - log-20220102022045
+          - log-20220103193504
+          - log-20220103204422
+          - log-20220103222204
+          - log-20220103230210
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/Logs/
+          on_conflict: rename_new
+  - name: Identify Temporary Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - tmp
+          - tmp~
+          - bak
+          - old
+          - newer
+          - pspcache
+          - cch
+          - cache
+          - cache-8
+          - cachedelete
+          - bak_000f
+          - bak_001d
+          - bak_002d
+          - bak_003d
+          - bak_004d
+          - bak_005d
+          - bak_006d
+          - bak_007d
+          - bak_008d
+          - reg_bak
+          - dll~
+          - created
+          - modified
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/Temporary/
+          on_conflict: rename_new
+  - name: Identify Error Reports
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - crash
+          - wer
+          - dmp
+          - hdmp
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/ErrorReports/
+          on_conflict: rename_new
+  - name: Identify System Data Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension:
+          - dat
+          - cab
+          - cpi
+          - crl
+          - adm
+          - sdb
+          - edb
+          - regtrans-ms
+          - cat
+          - search-ms
+          - chm
+          - ds_store
+          - localstorage
+          - bdic
+          - cap
+          - blf
+          - synclock
+          - cidb
+          - plist
+          - pima
+          - pimx
+          - bdm
+          - bau
+          - acl
+          - adr
+          - appinfo
+          - asc
+          - axd
+          - blf
+          - cfs
+          - dah
+          - dal
+          - dna
+          - idx
+          - id2
+          - inp
+          - int
+          - jbf
+          - jgz
+          - jrs
+          - lst
+          - mbdb
+          - mbdx
+          - mddata
+          - mdinfo
+          - menudata
+          - mis
+          - mkf
+          - mvc
+          - mxp
+          - mydocs
+          - nfo
+          - nvram
+          - pb
+          - pspcache
+          - sob
+          - soc
+          - sod
+          - soe
+          - sog
+          - soh
+          - sol
+          - state
+          - tag
+          - time
+          - version
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/System/
+          on_conflict: rename_new
+  - name: Find Duplicate Files
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - duplicate:
+          detect_original_by: created
+    actions:
+      - echo: "Found duplicate: {path} (Original: {duplicate.original})"
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/Duplicates/{relative_path}/
+          on_conflict: rename_new
+  - name: Handle Files With No Extension
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - extension: ""
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Organized/Other/NoExtension/
+          on_conflict: rename_new
+  - name: Handle Unusual File Extensions
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - regex:
+          expr: (?i).*\.(0|1|05|67|83|9|90|94|97|ii|ii1999|w|d|v2|small|sir|resp|rem|pd4|pd5|pat|stb|sab|qtp|pip|plf|qtch|zdct|zfsendtotarget|005|006|007|008|009|010|011|012|013|014|015|016|017|123|13|2|20050815|4|_p|biology|busadminmgmt|college|accounting|accurip|adminarchive|content|desklink|dist|engineering05|microsoft\[1\]|submitted|ii|ii1999|w|d|v2)$
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/Unknown/
+          on_conflict: rename_new
+  - name: Handle URL Fragments
+    enabled: true
+    targets: files
+    locations:
+      - path: /Volumes/Multimedia/Other
+    subfolders: true
+    filter_mode: all
+    filters:
+      - regex:
+          expr: (?i).*\.(com%252fq%252f|0%7c970%7c2861182%7c0%7c225%7c|com%252fq%252fhow_many_grams_in_250_ml_water|com%252fq%252fhow_many_ml_equals_250_grams|0%7c970%7c2861182%7c0%7c225%7cadid=5552566;bnid=1;ct=766894980;st=361;adcid=1;itime=441528952;reqtype=5|0%7c970%7c2861182%7c0%7c225%7cadtech;cfp=1;rndc=128544152;target=_blank;misc=\[1475533290\];adiframe=y;rdclick=).*$
+    actions:
+      - move:
+          dest: /Volumes/Multimedia/Other2/Cleanup/URLFragments/
+          on_conflict: rename_new
